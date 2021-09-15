@@ -13,7 +13,7 @@ type Props = {
 }
 
 const BlogIndex: React.VFC<Props> = ({ data, location }) => {
-  const siteTitle = data.site?.siteMetadata?.title || `Title`
+  const siteTitle: string = data.site?.siteMetadata?.title || `Title`
   const posts = data.allMarkdownRemark.nodes
 
   if (posts.length === 0) {
