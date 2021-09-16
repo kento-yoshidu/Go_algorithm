@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@emotion/core": "^11.0.0",
+    "@emotion/react": "^11.4.1",
     "@emotion/styled": "^11.3.0",
     "gatsby": "^3.13.0",
     "gatsby-plugin-emotion": "^6.13.0",
@@ -57,5 +58,13 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+  },
+  "babelMacros": {
+    "twin": {
+      "config": "./tailwind.config.js",
+      "preset": "emotion",
+      "hasSuggestions": true,
+      "debug": false
+    }
   }
 }
