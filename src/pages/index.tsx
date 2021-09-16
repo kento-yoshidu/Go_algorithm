@@ -1,5 +1,6 @@
 import * as React from "react"
 import { Link, graphql } from "gatsby"
+import "twin.macro"
 
 import Bio from "../components/bio"
 import Layout from "../components/layout"
@@ -21,7 +22,7 @@ const BlogIndex: React.VFC<Props> = ({ data, location }) => {
       <Layout location={location} title={siteTitle}>
         <Seo title="All posts" />
         <Bio />
-        <p>
+        <p tw="text-3xl font-bold py-2">
           No blog posts found. Add markdown posts to "content/blog" (or the
           directory you specified for the "gatsby-source-filesystem" plugin in
           gatsby-config.js).
@@ -60,6 +61,7 @@ const BlogIndex: React.VFC<Props> = ({ data, location }) => {
                     }}
                     itemProp="description"
                   />
+                  <p tw="text-3xl font-bold py-2 text-red-900">hogehoge</p>
                 </section>
               </article>
             </li>
