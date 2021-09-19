@@ -643,6 +643,108 @@ type ImageSharpResize = {
   readonly originalName: Maybe<Scalars['String']>;
 };
 
+type GraphCMS_Asset = Node & {
+  readonly remoteTypeName: Scalars['String'];
+  readonly remoteId: Scalars['ID'];
+  readonly locale: GraphCMS_Locale;
+  readonly stage: GraphCMS_Stage;
+  readonly createdAt: Scalars['JSON'];
+  readonly updatedAt: Scalars['JSON'];
+  readonly publishedAt: Maybe<Scalars['JSON']>;
+  readonly handle: Scalars['String'];
+  readonly fileName: Scalars['String'];
+  readonly height: Maybe<Scalars['Float']>;
+  readonly width: Maybe<Scalars['Float']>;
+  readonly size: Maybe<Scalars['Float']>;
+  readonly mimeType: Maybe<Scalars['String']>;
+  readonly createdBy: Maybe<GraphCMS_User>;
+  readonly updatedBy: Maybe<GraphCMS_User>;
+  readonly publishedBy: Maybe<GraphCMS_User>;
+  readonly iconAuthor: ReadonlyArray<GraphCMS_Author>;
+  readonly url: Scalars['String'];
+  readonly id: Scalars['ID'];
+  readonly parent: Maybe<Node>;
+  readonly children: ReadonlyArray<Node>;
+  readonly internal: Internal;
+  readonly gatsbyImageData: Maybe<Scalars['JSON']>;
+};
+
+
+type GraphCMS_Asset_gatsbyImageDataArgs = {
+  layout: Maybe<GatsbyImageLayout>;
+  width: Maybe<Scalars['Int']>;
+  height: Maybe<Scalars['Int']>;
+  aspectRatio: Maybe<Scalars['Float']>;
+  sizes: Maybe<Scalars['String']>;
+  outputPixelDensities: Maybe<ReadonlyArray<Maybe<Scalars['Float']>>>;
+  breakpoints: Maybe<ReadonlyArray<Maybe<Scalars['Int']>>>;
+  backgroundColor: Maybe<Scalars['String']>;
+  quality: Maybe<Scalars['Int']>;
+  placeholder: Maybe<GraphCMSImagePlaceholder>;
+};
+
+type GatsbyImageLayout =
+  | 'FIXED'
+  | 'FULL_WIDTH'
+  | 'CONSTRAINED';
+
+type GraphCMSImagePlaceholder =
+  | 'NONE'
+  | 'BLURRED'
+  | 'DOMINANT_COLOR'
+  | 'TRACED_SVG';
+
+type GraphCMS_Locale =
+  | 'en';
+
+type GraphCMS_Stage =
+  | 'DRAFT'
+  | 'PUBLISHED';
+
+type GraphCMS_User = Node & {
+  readonly remoteTypeName: Scalars['String'];
+  readonly remoteId: Scalars['ID'];
+  readonly stage: GraphCMS_Stage;
+  readonly createdAt: Scalars['JSON'];
+  readonly updatedAt: Scalars['JSON'];
+  readonly publishedAt: Maybe<Scalars['JSON']>;
+  readonly name: Scalars['String'];
+  readonly picture: Maybe<Scalars['String']>;
+  readonly isActive: Scalars['Boolean'];
+  readonly kind: GraphCMS_UserKind;
+  readonly id: Scalars['ID'];
+  readonly parent: Maybe<Node>;
+  readonly children: ReadonlyArray<Node>;
+  readonly internal: Internal;
+};
+
+type GraphCMS_Author = Node & {
+  readonly remoteTypeName: Scalars['String'];
+  readonly remoteId: Scalars['ID'];
+  readonly stage: GraphCMS_Stage;
+  readonly createdAt: Scalars['JSON'];
+  readonly updatedAt: Scalars['JSON'];
+  readonly publishedAt: Maybe<Scalars['JSON']>;
+  readonly name: Scalars['String'];
+  readonly affiliation: Maybe<Scalars['String']>;
+  readonly slug: Maybe<Scalars['String']>;
+  readonly description: Maybe<Scalars['String']>;
+  readonly createdBy: Maybe<GraphCMS_User>;
+  readonly updatedBy: Maybe<GraphCMS_User>;
+  readonly publishedBy: Maybe<GraphCMS_User>;
+  readonly icon: Maybe<GraphCMS_Asset>;
+  readonly id: Scalars['ID'];
+  readonly parent: Maybe<Node>;
+  readonly children: ReadonlyArray<Node>;
+  readonly internal: Internal;
+};
+
+type GraphCMS_UserKind =
+  | 'MEMBER'
+  | 'PAT'
+  | 'PUBLIC'
+  | 'WEBHOOK';
+
 type Author = {
   readonly name: Maybe<Scalars['String']>;
   readonly summary: Maybe<Scalars['String']>;
@@ -694,6 +796,15 @@ type SitePluginPluginOptions = {
   readonly cssPropOptimization: Maybe<Scalars['Boolean']>;
   readonly path: Maybe<Scalars['String']>;
   readonly name: Maybe<Scalars['String']>;
+  readonly endpoint: Maybe<Scalars['String']>;
+  readonly token: Maybe<Scalars['String']>;
+  readonly stages: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
+  readonly buildMarkdownNodes: Maybe<Scalars['Boolean']>;
+  readonly downloadLocalImages: Maybe<Scalars['Boolean']>;
+  readonly fragmentsPath: Maybe<Scalars['String']>;
+  readonly locales: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
+  readonly typePrefix: Maybe<Scalars['String']>;
+  readonly concurrency: Maybe<Scalars['Int']>;
   readonly maxWidth: Maybe<Scalars['Int']>;
   readonly linkImagesToOriginal: Maybe<Scalars['Boolean']>;
   readonly showCaptions: Maybe<Scalars['Boolean']>;
@@ -823,6 +934,12 @@ type Query = {
   readonly allMarkdownRemark: MarkdownRemarkConnection;
   readonly imageSharp: Maybe<ImageSharp>;
   readonly allImageSharp: ImageSharpConnection;
+  readonly graphCmsAsset: Maybe<GraphCMS_Asset>;
+  readonly allGraphCmsAsset: GraphCMS_AssetConnection;
+  readonly graphCmsUser: Maybe<GraphCMS_User>;
+  readonly allGraphCmsUser: GraphCMS_UserConnection;
+  readonly graphCmsAuthor: Maybe<GraphCMS_Author>;
+  readonly allGraphCmsAuthor: GraphCMS_AuthorConnection;
   readonly sitePlugin: Maybe<SitePlugin>;
   readonly allSitePlugin: SitePluginConnection;
   readonly siteBuildMetadata: Maybe<SiteBuildMetadata>;
@@ -1047,6 +1164,96 @@ type Query_imageSharpArgs = {
 type Query_allImageSharpArgs = {
   filter: Maybe<ImageSharpFilterInput>;
   sort: Maybe<ImageSharpSortInput>;
+  skip: Maybe<Scalars['Int']>;
+  limit: Maybe<Scalars['Int']>;
+};
+
+
+type Query_graphCmsAssetArgs = {
+  remoteTypeName: Maybe<StringQueryOperatorInput>;
+  remoteId: Maybe<IDQueryOperatorInput>;
+  locale: Maybe<GraphCMS_LocaleQueryOperatorInput>;
+  stage: Maybe<GraphCMS_StageQueryOperatorInput>;
+  createdAt: Maybe<JSONQueryOperatorInput>;
+  updatedAt: Maybe<JSONQueryOperatorInput>;
+  publishedAt: Maybe<JSONQueryOperatorInput>;
+  handle: Maybe<StringQueryOperatorInput>;
+  fileName: Maybe<StringQueryOperatorInput>;
+  height: Maybe<FloatQueryOperatorInput>;
+  width: Maybe<FloatQueryOperatorInput>;
+  size: Maybe<FloatQueryOperatorInput>;
+  mimeType: Maybe<StringQueryOperatorInput>;
+  createdBy: Maybe<GraphCMS_UserFilterInput>;
+  updatedBy: Maybe<GraphCMS_UserFilterInput>;
+  publishedBy: Maybe<GraphCMS_UserFilterInput>;
+  iconAuthor: Maybe<GraphCMS_AuthorFilterListInput>;
+  url: Maybe<StringQueryOperatorInput>;
+  id: Maybe<StringQueryOperatorInput>;
+  parent: Maybe<NodeFilterInput>;
+  children: Maybe<NodeFilterListInput>;
+  internal: Maybe<InternalFilterInput>;
+};
+
+
+type Query_allGraphCmsAssetArgs = {
+  filter: Maybe<GraphCMS_AssetFilterInput>;
+  sort: Maybe<GraphCMS_AssetSortInput>;
+  skip: Maybe<Scalars['Int']>;
+  limit: Maybe<Scalars['Int']>;
+};
+
+
+type Query_graphCmsUserArgs = {
+  remoteTypeName: Maybe<StringQueryOperatorInput>;
+  remoteId: Maybe<IDQueryOperatorInput>;
+  stage: Maybe<GraphCMS_StageQueryOperatorInput>;
+  createdAt: Maybe<JSONQueryOperatorInput>;
+  updatedAt: Maybe<JSONQueryOperatorInput>;
+  publishedAt: Maybe<JSONQueryOperatorInput>;
+  name: Maybe<StringQueryOperatorInput>;
+  picture: Maybe<StringQueryOperatorInput>;
+  isActive: Maybe<BooleanQueryOperatorInput>;
+  kind: Maybe<GraphCMS_UserKindQueryOperatorInput>;
+  id: Maybe<StringQueryOperatorInput>;
+  parent: Maybe<NodeFilterInput>;
+  children: Maybe<NodeFilterListInput>;
+  internal: Maybe<InternalFilterInput>;
+};
+
+
+type Query_allGraphCmsUserArgs = {
+  filter: Maybe<GraphCMS_UserFilterInput>;
+  sort: Maybe<GraphCMS_UserSortInput>;
+  skip: Maybe<Scalars['Int']>;
+  limit: Maybe<Scalars['Int']>;
+};
+
+
+type Query_graphCmsAuthorArgs = {
+  remoteTypeName: Maybe<StringQueryOperatorInput>;
+  remoteId: Maybe<IDQueryOperatorInput>;
+  stage: Maybe<GraphCMS_StageQueryOperatorInput>;
+  createdAt: Maybe<JSONQueryOperatorInput>;
+  updatedAt: Maybe<JSONQueryOperatorInput>;
+  publishedAt: Maybe<JSONQueryOperatorInput>;
+  name: Maybe<StringQueryOperatorInput>;
+  affiliation: Maybe<StringQueryOperatorInput>;
+  slug: Maybe<StringQueryOperatorInput>;
+  description: Maybe<StringQueryOperatorInput>;
+  createdBy: Maybe<GraphCMS_UserFilterInput>;
+  updatedBy: Maybe<GraphCMS_UserFilterInput>;
+  publishedBy: Maybe<GraphCMS_UserFilterInput>;
+  icon: Maybe<GraphCMS_AssetFilterInput>;
+  id: Maybe<StringQueryOperatorInput>;
+  parent: Maybe<NodeFilterInput>;
+  children: Maybe<NodeFilterListInput>;
+  internal: Maybe<InternalFilterInput>;
+};
+
+
+type Query_allGraphCmsAuthorArgs = {
+  filter: Maybe<GraphCMS_AuthorFilterInput>;
+  sort: Maybe<GraphCMS_AuthorSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
@@ -2383,6 +2590,15 @@ type SitePluginPluginOptionsFilterInput = {
   readonly cssPropOptimization: Maybe<BooleanQueryOperatorInput>;
   readonly path: Maybe<StringQueryOperatorInput>;
   readonly name: Maybe<StringQueryOperatorInput>;
+  readonly endpoint: Maybe<StringQueryOperatorInput>;
+  readonly token: Maybe<StringQueryOperatorInput>;
+  readonly stages: Maybe<StringQueryOperatorInput>;
+  readonly buildMarkdownNodes: Maybe<BooleanQueryOperatorInput>;
+  readonly downloadLocalImages: Maybe<BooleanQueryOperatorInput>;
+  readonly fragmentsPath: Maybe<StringQueryOperatorInput>;
+  readonly locales: Maybe<StringQueryOperatorInput>;
+  readonly typePrefix: Maybe<StringQueryOperatorInput>;
+  readonly concurrency: Maybe<IntQueryOperatorInput>;
   readonly maxWidth: Maybe<IntQueryOperatorInput>;
   readonly linkImagesToOriginal: Maybe<BooleanQueryOperatorInput>;
   readonly showCaptions: Maybe<BooleanQueryOperatorInput>;
@@ -2697,6 +2913,15 @@ type SitePageFieldsEnum =
   | 'pluginCreator.pluginOptions.cssPropOptimization'
   | 'pluginCreator.pluginOptions.path'
   | 'pluginCreator.pluginOptions.name'
+  | 'pluginCreator.pluginOptions.endpoint'
+  | 'pluginCreator.pluginOptions.token'
+  | 'pluginCreator.pluginOptions.stages'
+  | 'pluginCreator.pluginOptions.buildMarkdownNodes'
+  | 'pluginCreator.pluginOptions.downloadLocalImages'
+  | 'pluginCreator.pluginOptions.fragmentsPath'
+  | 'pluginCreator.pluginOptions.locales'
+  | 'pluginCreator.pluginOptions.typePrefix'
+  | 'pluginCreator.pluginOptions.concurrency'
   | 'pluginCreator.pluginOptions.maxWidth'
   | 'pluginCreator.pluginOptions.linkImagesToOriginal'
   | 'pluginCreator.pluginOptions.showCaptions'
@@ -3131,6 +3356,1264 @@ type ImageSharpSortInput = {
   readonly order: Maybe<ReadonlyArray<Maybe<SortOrderEnum>>>;
 };
 
+type IDQueryOperatorInput = {
+  readonly eq: Maybe<Scalars['ID']>;
+  readonly ne: Maybe<Scalars['ID']>;
+  readonly in: Maybe<ReadonlyArray<Maybe<Scalars['ID']>>>;
+  readonly nin: Maybe<ReadonlyArray<Maybe<Scalars['ID']>>>;
+};
+
+type GraphCMS_LocaleQueryOperatorInput = {
+  readonly eq: Maybe<GraphCMS_Locale>;
+  readonly ne: Maybe<GraphCMS_Locale>;
+  readonly in: Maybe<ReadonlyArray<Maybe<GraphCMS_Locale>>>;
+  readonly nin: Maybe<ReadonlyArray<Maybe<GraphCMS_Locale>>>;
+};
+
+type GraphCMS_StageQueryOperatorInput = {
+  readonly eq: Maybe<GraphCMS_Stage>;
+  readonly ne: Maybe<GraphCMS_Stage>;
+  readonly in: Maybe<ReadonlyArray<Maybe<GraphCMS_Stage>>>;
+  readonly nin: Maybe<ReadonlyArray<Maybe<GraphCMS_Stage>>>;
+};
+
+type GraphCMS_UserFilterInput = {
+  readonly remoteTypeName: Maybe<StringQueryOperatorInput>;
+  readonly remoteId: Maybe<IDQueryOperatorInput>;
+  readonly stage: Maybe<GraphCMS_StageQueryOperatorInput>;
+  readonly createdAt: Maybe<JSONQueryOperatorInput>;
+  readonly updatedAt: Maybe<JSONQueryOperatorInput>;
+  readonly publishedAt: Maybe<JSONQueryOperatorInput>;
+  readonly name: Maybe<StringQueryOperatorInput>;
+  readonly picture: Maybe<StringQueryOperatorInput>;
+  readonly isActive: Maybe<BooleanQueryOperatorInput>;
+  readonly kind: Maybe<GraphCMS_UserKindQueryOperatorInput>;
+  readonly id: Maybe<StringQueryOperatorInput>;
+  readonly parent: Maybe<NodeFilterInput>;
+  readonly children: Maybe<NodeFilterListInput>;
+  readonly internal: Maybe<InternalFilterInput>;
+};
+
+type GraphCMS_UserKindQueryOperatorInput = {
+  readonly eq: Maybe<GraphCMS_UserKind>;
+  readonly ne: Maybe<GraphCMS_UserKind>;
+  readonly in: Maybe<ReadonlyArray<Maybe<GraphCMS_UserKind>>>;
+  readonly nin: Maybe<ReadonlyArray<Maybe<GraphCMS_UserKind>>>;
+};
+
+type GraphCMS_AuthorFilterListInput = {
+  readonly elemMatch: Maybe<GraphCMS_AuthorFilterInput>;
+};
+
+type GraphCMS_AuthorFilterInput = {
+  readonly remoteTypeName: Maybe<StringQueryOperatorInput>;
+  readonly remoteId: Maybe<IDQueryOperatorInput>;
+  readonly stage: Maybe<GraphCMS_StageQueryOperatorInput>;
+  readonly createdAt: Maybe<JSONQueryOperatorInput>;
+  readonly updatedAt: Maybe<JSONQueryOperatorInput>;
+  readonly publishedAt: Maybe<JSONQueryOperatorInput>;
+  readonly name: Maybe<StringQueryOperatorInput>;
+  readonly affiliation: Maybe<StringQueryOperatorInput>;
+  readonly slug: Maybe<StringQueryOperatorInput>;
+  readonly description: Maybe<StringQueryOperatorInput>;
+  readonly createdBy: Maybe<GraphCMS_UserFilterInput>;
+  readonly updatedBy: Maybe<GraphCMS_UserFilterInput>;
+  readonly publishedBy: Maybe<GraphCMS_UserFilterInput>;
+  readonly icon: Maybe<GraphCMS_AssetFilterInput>;
+  readonly id: Maybe<StringQueryOperatorInput>;
+  readonly parent: Maybe<NodeFilterInput>;
+  readonly children: Maybe<NodeFilterListInput>;
+  readonly internal: Maybe<InternalFilterInput>;
+};
+
+type GraphCMS_AssetFilterInput = {
+  readonly remoteTypeName: Maybe<StringQueryOperatorInput>;
+  readonly remoteId: Maybe<IDQueryOperatorInput>;
+  readonly locale: Maybe<GraphCMS_LocaleQueryOperatorInput>;
+  readonly stage: Maybe<GraphCMS_StageQueryOperatorInput>;
+  readonly createdAt: Maybe<JSONQueryOperatorInput>;
+  readonly updatedAt: Maybe<JSONQueryOperatorInput>;
+  readonly publishedAt: Maybe<JSONQueryOperatorInput>;
+  readonly handle: Maybe<StringQueryOperatorInput>;
+  readonly fileName: Maybe<StringQueryOperatorInput>;
+  readonly height: Maybe<FloatQueryOperatorInput>;
+  readonly width: Maybe<FloatQueryOperatorInput>;
+  readonly size: Maybe<FloatQueryOperatorInput>;
+  readonly mimeType: Maybe<StringQueryOperatorInput>;
+  readonly createdBy: Maybe<GraphCMS_UserFilterInput>;
+  readonly updatedBy: Maybe<GraphCMS_UserFilterInput>;
+  readonly publishedBy: Maybe<GraphCMS_UserFilterInput>;
+  readonly iconAuthor: Maybe<GraphCMS_AuthorFilterListInput>;
+  readonly url: Maybe<StringQueryOperatorInput>;
+  readonly id: Maybe<StringQueryOperatorInput>;
+  readonly parent: Maybe<NodeFilterInput>;
+  readonly children: Maybe<NodeFilterListInput>;
+  readonly internal: Maybe<InternalFilterInput>;
+};
+
+type GraphCMS_AssetConnection = {
+  readonly totalCount: Scalars['Int'];
+  readonly edges: ReadonlyArray<GraphCMS_AssetEdge>;
+  readonly nodes: ReadonlyArray<GraphCMS_Asset>;
+  readonly pageInfo: PageInfo;
+  readonly distinct: ReadonlyArray<Scalars['String']>;
+  readonly max: Maybe<Scalars['Float']>;
+  readonly min: Maybe<Scalars['Float']>;
+  readonly sum: Maybe<Scalars['Float']>;
+  readonly group: ReadonlyArray<GraphCMS_AssetGroupConnection>;
+};
+
+
+type GraphCMS_AssetConnection_distinctArgs = {
+  field: GraphCMS_AssetFieldsEnum;
+};
+
+
+type GraphCMS_AssetConnection_maxArgs = {
+  field: GraphCMS_AssetFieldsEnum;
+};
+
+
+type GraphCMS_AssetConnection_minArgs = {
+  field: GraphCMS_AssetFieldsEnum;
+};
+
+
+type GraphCMS_AssetConnection_sumArgs = {
+  field: GraphCMS_AssetFieldsEnum;
+};
+
+
+type GraphCMS_AssetConnection_groupArgs = {
+  skip: Maybe<Scalars['Int']>;
+  limit: Maybe<Scalars['Int']>;
+  field: GraphCMS_AssetFieldsEnum;
+};
+
+type GraphCMS_AssetEdge = {
+  readonly next: Maybe<GraphCMS_Asset>;
+  readonly node: GraphCMS_Asset;
+  readonly previous: Maybe<GraphCMS_Asset>;
+};
+
+type GraphCMS_AssetFieldsEnum =
+  | 'remoteTypeName'
+  | 'remoteId'
+  | 'locale'
+  | 'stage'
+  | 'createdAt'
+  | 'updatedAt'
+  | 'publishedAt'
+  | 'handle'
+  | 'fileName'
+  | 'height'
+  | 'width'
+  | 'size'
+  | 'mimeType'
+  | 'createdBy.remoteTypeName'
+  | 'createdBy.remoteId'
+  | 'createdBy.stage'
+  | 'createdBy.createdAt'
+  | 'createdBy.updatedAt'
+  | 'createdBy.publishedAt'
+  | 'createdBy.name'
+  | 'createdBy.picture'
+  | 'createdBy.isActive'
+  | 'createdBy.kind'
+  | 'createdBy.id'
+  | 'createdBy.parent.id'
+  | 'createdBy.parent.parent.id'
+  | 'createdBy.parent.parent.children'
+  | 'createdBy.parent.children'
+  | 'createdBy.parent.children.id'
+  | 'createdBy.parent.children.children'
+  | 'createdBy.parent.internal.content'
+  | 'createdBy.parent.internal.contentDigest'
+  | 'createdBy.parent.internal.description'
+  | 'createdBy.parent.internal.fieldOwners'
+  | 'createdBy.parent.internal.ignoreType'
+  | 'createdBy.parent.internal.mediaType'
+  | 'createdBy.parent.internal.owner'
+  | 'createdBy.parent.internal.type'
+  | 'createdBy.children'
+  | 'createdBy.children.id'
+  | 'createdBy.children.parent.id'
+  | 'createdBy.children.parent.children'
+  | 'createdBy.children.children'
+  | 'createdBy.children.children.id'
+  | 'createdBy.children.children.children'
+  | 'createdBy.children.internal.content'
+  | 'createdBy.children.internal.contentDigest'
+  | 'createdBy.children.internal.description'
+  | 'createdBy.children.internal.fieldOwners'
+  | 'createdBy.children.internal.ignoreType'
+  | 'createdBy.children.internal.mediaType'
+  | 'createdBy.children.internal.owner'
+  | 'createdBy.children.internal.type'
+  | 'createdBy.internal.content'
+  | 'createdBy.internal.contentDigest'
+  | 'createdBy.internal.description'
+  | 'createdBy.internal.fieldOwners'
+  | 'createdBy.internal.ignoreType'
+  | 'createdBy.internal.mediaType'
+  | 'createdBy.internal.owner'
+  | 'createdBy.internal.type'
+  | 'updatedBy.remoteTypeName'
+  | 'updatedBy.remoteId'
+  | 'updatedBy.stage'
+  | 'updatedBy.createdAt'
+  | 'updatedBy.updatedAt'
+  | 'updatedBy.publishedAt'
+  | 'updatedBy.name'
+  | 'updatedBy.picture'
+  | 'updatedBy.isActive'
+  | 'updatedBy.kind'
+  | 'updatedBy.id'
+  | 'updatedBy.parent.id'
+  | 'updatedBy.parent.parent.id'
+  | 'updatedBy.parent.parent.children'
+  | 'updatedBy.parent.children'
+  | 'updatedBy.parent.children.id'
+  | 'updatedBy.parent.children.children'
+  | 'updatedBy.parent.internal.content'
+  | 'updatedBy.parent.internal.contentDigest'
+  | 'updatedBy.parent.internal.description'
+  | 'updatedBy.parent.internal.fieldOwners'
+  | 'updatedBy.parent.internal.ignoreType'
+  | 'updatedBy.parent.internal.mediaType'
+  | 'updatedBy.parent.internal.owner'
+  | 'updatedBy.parent.internal.type'
+  | 'updatedBy.children'
+  | 'updatedBy.children.id'
+  | 'updatedBy.children.parent.id'
+  | 'updatedBy.children.parent.children'
+  | 'updatedBy.children.children'
+  | 'updatedBy.children.children.id'
+  | 'updatedBy.children.children.children'
+  | 'updatedBy.children.internal.content'
+  | 'updatedBy.children.internal.contentDigest'
+  | 'updatedBy.children.internal.description'
+  | 'updatedBy.children.internal.fieldOwners'
+  | 'updatedBy.children.internal.ignoreType'
+  | 'updatedBy.children.internal.mediaType'
+  | 'updatedBy.children.internal.owner'
+  | 'updatedBy.children.internal.type'
+  | 'updatedBy.internal.content'
+  | 'updatedBy.internal.contentDigest'
+  | 'updatedBy.internal.description'
+  | 'updatedBy.internal.fieldOwners'
+  | 'updatedBy.internal.ignoreType'
+  | 'updatedBy.internal.mediaType'
+  | 'updatedBy.internal.owner'
+  | 'updatedBy.internal.type'
+  | 'publishedBy.remoteTypeName'
+  | 'publishedBy.remoteId'
+  | 'publishedBy.stage'
+  | 'publishedBy.createdAt'
+  | 'publishedBy.updatedAt'
+  | 'publishedBy.publishedAt'
+  | 'publishedBy.name'
+  | 'publishedBy.picture'
+  | 'publishedBy.isActive'
+  | 'publishedBy.kind'
+  | 'publishedBy.id'
+  | 'publishedBy.parent.id'
+  | 'publishedBy.parent.parent.id'
+  | 'publishedBy.parent.parent.children'
+  | 'publishedBy.parent.children'
+  | 'publishedBy.parent.children.id'
+  | 'publishedBy.parent.children.children'
+  | 'publishedBy.parent.internal.content'
+  | 'publishedBy.parent.internal.contentDigest'
+  | 'publishedBy.parent.internal.description'
+  | 'publishedBy.parent.internal.fieldOwners'
+  | 'publishedBy.parent.internal.ignoreType'
+  | 'publishedBy.parent.internal.mediaType'
+  | 'publishedBy.parent.internal.owner'
+  | 'publishedBy.parent.internal.type'
+  | 'publishedBy.children'
+  | 'publishedBy.children.id'
+  | 'publishedBy.children.parent.id'
+  | 'publishedBy.children.parent.children'
+  | 'publishedBy.children.children'
+  | 'publishedBy.children.children.id'
+  | 'publishedBy.children.children.children'
+  | 'publishedBy.children.internal.content'
+  | 'publishedBy.children.internal.contentDigest'
+  | 'publishedBy.children.internal.description'
+  | 'publishedBy.children.internal.fieldOwners'
+  | 'publishedBy.children.internal.ignoreType'
+  | 'publishedBy.children.internal.mediaType'
+  | 'publishedBy.children.internal.owner'
+  | 'publishedBy.children.internal.type'
+  | 'publishedBy.internal.content'
+  | 'publishedBy.internal.contentDigest'
+  | 'publishedBy.internal.description'
+  | 'publishedBy.internal.fieldOwners'
+  | 'publishedBy.internal.ignoreType'
+  | 'publishedBy.internal.mediaType'
+  | 'publishedBy.internal.owner'
+  | 'publishedBy.internal.type'
+  | 'iconAuthor'
+  | 'iconAuthor.remoteTypeName'
+  | 'iconAuthor.remoteId'
+  | 'iconAuthor.stage'
+  | 'iconAuthor.createdAt'
+  | 'iconAuthor.updatedAt'
+  | 'iconAuthor.publishedAt'
+  | 'iconAuthor.name'
+  | 'iconAuthor.affiliation'
+  | 'iconAuthor.slug'
+  | 'iconAuthor.description'
+  | 'iconAuthor.createdBy.remoteTypeName'
+  | 'iconAuthor.createdBy.remoteId'
+  | 'iconAuthor.createdBy.stage'
+  | 'iconAuthor.createdBy.createdAt'
+  | 'iconAuthor.createdBy.updatedAt'
+  | 'iconAuthor.createdBy.publishedAt'
+  | 'iconAuthor.createdBy.name'
+  | 'iconAuthor.createdBy.picture'
+  | 'iconAuthor.createdBy.isActive'
+  | 'iconAuthor.createdBy.kind'
+  | 'iconAuthor.createdBy.id'
+  | 'iconAuthor.createdBy.parent.id'
+  | 'iconAuthor.createdBy.parent.children'
+  | 'iconAuthor.createdBy.children'
+  | 'iconAuthor.createdBy.children.id'
+  | 'iconAuthor.createdBy.children.children'
+  | 'iconAuthor.createdBy.internal.content'
+  | 'iconAuthor.createdBy.internal.contentDigest'
+  | 'iconAuthor.createdBy.internal.description'
+  | 'iconAuthor.createdBy.internal.fieldOwners'
+  | 'iconAuthor.createdBy.internal.ignoreType'
+  | 'iconAuthor.createdBy.internal.mediaType'
+  | 'iconAuthor.createdBy.internal.owner'
+  | 'iconAuthor.createdBy.internal.type'
+  | 'iconAuthor.updatedBy.remoteTypeName'
+  | 'iconAuthor.updatedBy.remoteId'
+  | 'iconAuthor.updatedBy.stage'
+  | 'iconAuthor.updatedBy.createdAt'
+  | 'iconAuthor.updatedBy.updatedAt'
+  | 'iconAuthor.updatedBy.publishedAt'
+  | 'iconAuthor.updatedBy.name'
+  | 'iconAuthor.updatedBy.picture'
+  | 'iconAuthor.updatedBy.isActive'
+  | 'iconAuthor.updatedBy.kind'
+  | 'iconAuthor.updatedBy.id'
+  | 'iconAuthor.updatedBy.parent.id'
+  | 'iconAuthor.updatedBy.parent.children'
+  | 'iconAuthor.updatedBy.children'
+  | 'iconAuthor.updatedBy.children.id'
+  | 'iconAuthor.updatedBy.children.children'
+  | 'iconAuthor.updatedBy.internal.content'
+  | 'iconAuthor.updatedBy.internal.contentDigest'
+  | 'iconAuthor.updatedBy.internal.description'
+  | 'iconAuthor.updatedBy.internal.fieldOwners'
+  | 'iconAuthor.updatedBy.internal.ignoreType'
+  | 'iconAuthor.updatedBy.internal.mediaType'
+  | 'iconAuthor.updatedBy.internal.owner'
+  | 'iconAuthor.updatedBy.internal.type'
+  | 'iconAuthor.publishedBy.remoteTypeName'
+  | 'iconAuthor.publishedBy.remoteId'
+  | 'iconAuthor.publishedBy.stage'
+  | 'iconAuthor.publishedBy.createdAt'
+  | 'iconAuthor.publishedBy.updatedAt'
+  | 'iconAuthor.publishedBy.publishedAt'
+  | 'iconAuthor.publishedBy.name'
+  | 'iconAuthor.publishedBy.picture'
+  | 'iconAuthor.publishedBy.isActive'
+  | 'iconAuthor.publishedBy.kind'
+  | 'iconAuthor.publishedBy.id'
+  | 'iconAuthor.publishedBy.parent.id'
+  | 'iconAuthor.publishedBy.parent.children'
+  | 'iconAuthor.publishedBy.children'
+  | 'iconAuthor.publishedBy.children.id'
+  | 'iconAuthor.publishedBy.children.children'
+  | 'iconAuthor.publishedBy.internal.content'
+  | 'iconAuthor.publishedBy.internal.contentDigest'
+  | 'iconAuthor.publishedBy.internal.description'
+  | 'iconAuthor.publishedBy.internal.fieldOwners'
+  | 'iconAuthor.publishedBy.internal.ignoreType'
+  | 'iconAuthor.publishedBy.internal.mediaType'
+  | 'iconAuthor.publishedBy.internal.owner'
+  | 'iconAuthor.publishedBy.internal.type'
+  | 'iconAuthor.icon.remoteTypeName'
+  | 'iconAuthor.icon.remoteId'
+  | 'iconAuthor.icon.locale'
+  | 'iconAuthor.icon.stage'
+  | 'iconAuthor.icon.createdAt'
+  | 'iconAuthor.icon.updatedAt'
+  | 'iconAuthor.icon.publishedAt'
+  | 'iconAuthor.icon.handle'
+  | 'iconAuthor.icon.fileName'
+  | 'iconAuthor.icon.height'
+  | 'iconAuthor.icon.width'
+  | 'iconAuthor.icon.size'
+  | 'iconAuthor.icon.mimeType'
+  | 'iconAuthor.icon.createdBy.remoteTypeName'
+  | 'iconAuthor.icon.createdBy.remoteId'
+  | 'iconAuthor.icon.createdBy.stage'
+  | 'iconAuthor.icon.createdBy.createdAt'
+  | 'iconAuthor.icon.createdBy.updatedAt'
+  | 'iconAuthor.icon.createdBy.publishedAt'
+  | 'iconAuthor.icon.createdBy.name'
+  | 'iconAuthor.icon.createdBy.picture'
+  | 'iconAuthor.icon.createdBy.isActive'
+  | 'iconAuthor.icon.createdBy.kind'
+  | 'iconAuthor.icon.createdBy.id'
+  | 'iconAuthor.icon.createdBy.children'
+  | 'iconAuthor.icon.updatedBy.remoteTypeName'
+  | 'iconAuthor.icon.updatedBy.remoteId'
+  | 'iconAuthor.icon.updatedBy.stage'
+  | 'iconAuthor.icon.updatedBy.createdAt'
+  | 'iconAuthor.icon.updatedBy.updatedAt'
+  | 'iconAuthor.icon.updatedBy.publishedAt'
+  | 'iconAuthor.icon.updatedBy.name'
+  | 'iconAuthor.icon.updatedBy.picture'
+  | 'iconAuthor.icon.updatedBy.isActive'
+  | 'iconAuthor.icon.updatedBy.kind'
+  | 'iconAuthor.icon.updatedBy.id'
+  | 'iconAuthor.icon.updatedBy.children'
+  | 'iconAuthor.icon.publishedBy.remoteTypeName'
+  | 'iconAuthor.icon.publishedBy.remoteId'
+  | 'iconAuthor.icon.publishedBy.stage'
+  | 'iconAuthor.icon.publishedBy.createdAt'
+  | 'iconAuthor.icon.publishedBy.updatedAt'
+  | 'iconAuthor.icon.publishedBy.publishedAt'
+  | 'iconAuthor.icon.publishedBy.name'
+  | 'iconAuthor.icon.publishedBy.picture'
+  | 'iconAuthor.icon.publishedBy.isActive'
+  | 'iconAuthor.icon.publishedBy.kind'
+  | 'iconAuthor.icon.publishedBy.id'
+  | 'iconAuthor.icon.publishedBy.children'
+  | 'iconAuthor.icon.iconAuthor'
+  | 'iconAuthor.icon.iconAuthor.remoteTypeName'
+  | 'iconAuthor.icon.iconAuthor.remoteId'
+  | 'iconAuthor.icon.iconAuthor.stage'
+  | 'iconAuthor.icon.iconAuthor.createdAt'
+  | 'iconAuthor.icon.iconAuthor.updatedAt'
+  | 'iconAuthor.icon.iconAuthor.publishedAt'
+  | 'iconAuthor.icon.iconAuthor.name'
+  | 'iconAuthor.icon.iconAuthor.affiliation'
+  | 'iconAuthor.icon.iconAuthor.slug'
+  | 'iconAuthor.icon.iconAuthor.description'
+  | 'iconAuthor.icon.iconAuthor.id'
+  | 'iconAuthor.icon.iconAuthor.children'
+  | 'iconAuthor.icon.url'
+  | 'iconAuthor.icon.id'
+  | 'iconAuthor.icon.parent.id'
+  | 'iconAuthor.icon.parent.children'
+  | 'iconAuthor.icon.children'
+  | 'iconAuthor.icon.children.id'
+  | 'iconAuthor.icon.children.children'
+  | 'iconAuthor.icon.internal.content'
+  | 'iconAuthor.icon.internal.contentDigest'
+  | 'iconAuthor.icon.internal.description'
+  | 'iconAuthor.icon.internal.fieldOwners'
+  | 'iconAuthor.icon.internal.ignoreType'
+  | 'iconAuthor.icon.internal.mediaType'
+  | 'iconAuthor.icon.internal.owner'
+  | 'iconAuthor.icon.internal.type'
+  | 'iconAuthor.id'
+  | 'iconAuthor.parent.id'
+  | 'iconAuthor.parent.parent.id'
+  | 'iconAuthor.parent.parent.children'
+  | 'iconAuthor.parent.children'
+  | 'iconAuthor.parent.children.id'
+  | 'iconAuthor.parent.children.children'
+  | 'iconAuthor.parent.internal.content'
+  | 'iconAuthor.parent.internal.contentDigest'
+  | 'iconAuthor.parent.internal.description'
+  | 'iconAuthor.parent.internal.fieldOwners'
+  | 'iconAuthor.parent.internal.ignoreType'
+  | 'iconAuthor.parent.internal.mediaType'
+  | 'iconAuthor.parent.internal.owner'
+  | 'iconAuthor.parent.internal.type'
+  | 'iconAuthor.children'
+  | 'iconAuthor.children.id'
+  | 'iconAuthor.children.parent.id'
+  | 'iconAuthor.children.parent.children'
+  | 'iconAuthor.children.children'
+  | 'iconAuthor.children.children.id'
+  | 'iconAuthor.children.children.children'
+  | 'iconAuthor.children.internal.content'
+  | 'iconAuthor.children.internal.contentDigest'
+  | 'iconAuthor.children.internal.description'
+  | 'iconAuthor.children.internal.fieldOwners'
+  | 'iconAuthor.children.internal.ignoreType'
+  | 'iconAuthor.children.internal.mediaType'
+  | 'iconAuthor.children.internal.owner'
+  | 'iconAuthor.children.internal.type'
+  | 'iconAuthor.internal.content'
+  | 'iconAuthor.internal.contentDigest'
+  | 'iconAuthor.internal.description'
+  | 'iconAuthor.internal.fieldOwners'
+  | 'iconAuthor.internal.ignoreType'
+  | 'iconAuthor.internal.mediaType'
+  | 'iconAuthor.internal.owner'
+  | 'iconAuthor.internal.type'
+  | 'url'
+  | 'id'
+  | 'parent.id'
+  | 'parent.parent.id'
+  | 'parent.parent.parent.id'
+  | 'parent.parent.parent.children'
+  | 'parent.parent.children'
+  | 'parent.parent.children.id'
+  | 'parent.parent.children.children'
+  | 'parent.parent.internal.content'
+  | 'parent.parent.internal.contentDigest'
+  | 'parent.parent.internal.description'
+  | 'parent.parent.internal.fieldOwners'
+  | 'parent.parent.internal.ignoreType'
+  | 'parent.parent.internal.mediaType'
+  | 'parent.parent.internal.owner'
+  | 'parent.parent.internal.type'
+  | 'parent.children'
+  | 'parent.children.id'
+  | 'parent.children.parent.id'
+  | 'parent.children.parent.children'
+  | 'parent.children.children'
+  | 'parent.children.children.id'
+  | 'parent.children.children.children'
+  | 'parent.children.internal.content'
+  | 'parent.children.internal.contentDigest'
+  | 'parent.children.internal.description'
+  | 'parent.children.internal.fieldOwners'
+  | 'parent.children.internal.ignoreType'
+  | 'parent.children.internal.mediaType'
+  | 'parent.children.internal.owner'
+  | 'parent.children.internal.type'
+  | 'parent.internal.content'
+  | 'parent.internal.contentDigest'
+  | 'parent.internal.description'
+  | 'parent.internal.fieldOwners'
+  | 'parent.internal.ignoreType'
+  | 'parent.internal.mediaType'
+  | 'parent.internal.owner'
+  | 'parent.internal.type'
+  | 'children'
+  | 'children.id'
+  | 'children.parent.id'
+  | 'children.parent.parent.id'
+  | 'children.parent.parent.children'
+  | 'children.parent.children'
+  | 'children.parent.children.id'
+  | 'children.parent.children.children'
+  | 'children.parent.internal.content'
+  | 'children.parent.internal.contentDigest'
+  | 'children.parent.internal.description'
+  | 'children.parent.internal.fieldOwners'
+  | 'children.parent.internal.ignoreType'
+  | 'children.parent.internal.mediaType'
+  | 'children.parent.internal.owner'
+  | 'children.parent.internal.type'
+  | 'children.children'
+  | 'children.children.id'
+  | 'children.children.parent.id'
+  | 'children.children.parent.children'
+  | 'children.children.children'
+  | 'children.children.children.id'
+  | 'children.children.children.children'
+  | 'children.children.internal.content'
+  | 'children.children.internal.contentDigest'
+  | 'children.children.internal.description'
+  | 'children.children.internal.fieldOwners'
+  | 'children.children.internal.ignoreType'
+  | 'children.children.internal.mediaType'
+  | 'children.children.internal.owner'
+  | 'children.children.internal.type'
+  | 'children.internal.content'
+  | 'children.internal.contentDigest'
+  | 'children.internal.description'
+  | 'children.internal.fieldOwners'
+  | 'children.internal.ignoreType'
+  | 'children.internal.mediaType'
+  | 'children.internal.owner'
+  | 'children.internal.type'
+  | 'internal.content'
+  | 'internal.contentDigest'
+  | 'internal.description'
+  | 'internal.fieldOwners'
+  | 'internal.ignoreType'
+  | 'internal.mediaType'
+  | 'internal.owner'
+  | 'internal.type';
+
+type GraphCMS_AssetGroupConnection = {
+  readonly totalCount: Scalars['Int'];
+  readonly edges: ReadonlyArray<GraphCMS_AssetEdge>;
+  readonly nodes: ReadonlyArray<GraphCMS_Asset>;
+  readonly pageInfo: PageInfo;
+  readonly field: Scalars['String'];
+  readonly fieldValue: Maybe<Scalars['String']>;
+};
+
+type GraphCMS_AssetSortInput = {
+  readonly fields: Maybe<ReadonlyArray<Maybe<GraphCMS_AssetFieldsEnum>>>;
+  readonly order: Maybe<ReadonlyArray<Maybe<SortOrderEnum>>>;
+};
+
+type GraphCMS_UserConnection = {
+  readonly totalCount: Scalars['Int'];
+  readonly edges: ReadonlyArray<GraphCMS_UserEdge>;
+  readonly nodes: ReadonlyArray<GraphCMS_User>;
+  readonly pageInfo: PageInfo;
+  readonly distinct: ReadonlyArray<Scalars['String']>;
+  readonly max: Maybe<Scalars['Float']>;
+  readonly min: Maybe<Scalars['Float']>;
+  readonly sum: Maybe<Scalars['Float']>;
+  readonly group: ReadonlyArray<GraphCMS_UserGroupConnection>;
+};
+
+
+type GraphCMS_UserConnection_distinctArgs = {
+  field: GraphCMS_UserFieldsEnum;
+};
+
+
+type GraphCMS_UserConnection_maxArgs = {
+  field: GraphCMS_UserFieldsEnum;
+};
+
+
+type GraphCMS_UserConnection_minArgs = {
+  field: GraphCMS_UserFieldsEnum;
+};
+
+
+type GraphCMS_UserConnection_sumArgs = {
+  field: GraphCMS_UserFieldsEnum;
+};
+
+
+type GraphCMS_UserConnection_groupArgs = {
+  skip: Maybe<Scalars['Int']>;
+  limit: Maybe<Scalars['Int']>;
+  field: GraphCMS_UserFieldsEnum;
+};
+
+type GraphCMS_UserEdge = {
+  readonly next: Maybe<GraphCMS_User>;
+  readonly node: GraphCMS_User;
+  readonly previous: Maybe<GraphCMS_User>;
+};
+
+type GraphCMS_UserFieldsEnum =
+  | 'remoteTypeName'
+  | 'remoteId'
+  | 'stage'
+  | 'createdAt'
+  | 'updatedAt'
+  | 'publishedAt'
+  | 'name'
+  | 'picture'
+  | 'isActive'
+  | 'kind'
+  | 'id'
+  | 'parent.id'
+  | 'parent.parent.id'
+  | 'parent.parent.parent.id'
+  | 'parent.parent.parent.children'
+  | 'parent.parent.children'
+  | 'parent.parent.children.id'
+  | 'parent.parent.children.children'
+  | 'parent.parent.internal.content'
+  | 'parent.parent.internal.contentDigest'
+  | 'parent.parent.internal.description'
+  | 'parent.parent.internal.fieldOwners'
+  | 'parent.parent.internal.ignoreType'
+  | 'parent.parent.internal.mediaType'
+  | 'parent.parent.internal.owner'
+  | 'parent.parent.internal.type'
+  | 'parent.children'
+  | 'parent.children.id'
+  | 'parent.children.parent.id'
+  | 'parent.children.parent.children'
+  | 'parent.children.children'
+  | 'parent.children.children.id'
+  | 'parent.children.children.children'
+  | 'parent.children.internal.content'
+  | 'parent.children.internal.contentDigest'
+  | 'parent.children.internal.description'
+  | 'parent.children.internal.fieldOwners'
+  | 'parent.children.internal.ignoreType'
+  | 'parent.children.internal.mediaType'
+  | 'parent.children.internal.owner'
+  | 'parent.children.internal.type'
+  | 'parent.internal.content'
+  | 'parent.internal.contentDigest'
+  | 'parent.internal.description'
+  | 'parent.internal.fieldOwners'
+  | 'parent.internal.ignoreType'
+  | 'parent.internal.mediaType'
+  | 'parent.internal.owner'
+  | 'parent.internal.type'
+  | 'children'
+  | 'children.id'
+  | 'children.parent.id'
+  | 'children.parent.parent.id'
+  | 'children.parent.parent.children'
+  | 'children.parent.children'
+  | 'children.parent.children.id'
+  | 'children.parent.children.children'
+  | 'children.parent.internal.content'
+  | 'children.parent.internal.contentDigest'
+  | 'children.parent.internal.description'
+  | 'children.parent.internal.fieldOwners'
+  | 'children.parent.internal.ignoreType'
+  | 'children.parent.internal.mediaType'
+  | 'children.parent.internal.owner'
+  | 'children.parent.internal.type'
+  | 'children.children'
+  | 'children.children.id'
+  | 'children.children.parent.id'
+  | 'children.children.parent.children'
+  | 'children.children.children'
+  | 'children.children.children.id'
+  | 'children.children.children.children'
+  | 'children.children.internal.content'
+  | 'children.children.internal.contentDigest'
+  | 'children.children.internal.description'
+  | 'children.children.internal.fieldOwners'
+  | 'children.children.internal.ignoreType'
+  | 'children.children.internal.mediaType'
+  | 'children.children.internal.owner'
+  | 'children.children.internal.type'
+  | 'children.internal.content'
+  | 'children.internal.contentDigest'
+  | 'children.internal.description'
+  | 'children.internal.fieldOwners'
+  | 'children.internal.ignoreType'
+  | 'children.internal.mediaType'
+  | 'children.internal.owner'
+  | 'children.internal.type'
+  | 'internal.content'
+  | 'internal.contentDigest'
+  | 'internal.description'
+  | 'internal.fieldOwners'
+  | 'internal.ignoreType'
+  | 'internal.mediaType'
+  | 'internal.owner'
+  | 'internal.type';
+
+type GraphCMS_UserGroupConnection = {
+  readonly totalCount: Scalars['Int'];
+  readonly edges: ReadonlyArray<GraphCMS_UserEdge>;
+  readonly nodes: ReadonlyArray<GraphCMS_User>;
+  readonly pageInfo: PageInfo;
+  readonly field: Scalars['String'];
+  readonly fieldValue: Maybe<Scalars['String']>;
+};
+
+type GraphCMS_UserSortInput = {
+  readonly fields: Maybe<ReadonlyArray<Maybe<GraphCMS_UserFieldsEnum>>>;
+  readonly order: Maybe<ReadonlyArray<Maybe<SortOrderEnum>>>;
+};
+
+type GraphCMS_AuthorConnection = {
+  readonly totalCount: Scalars['Int'];
+  readonly edges: ReadonlyArray<GraphCMS_AuthorEdge>;
+  readonly nodes: ReadonlyArray<GraphCMS_Author>;
+  readonly pageInfo: PageInfo;
+  readonly distinct: ReadonlyArray<Scalars['String']>;
+  readonly max: Maybe<Scalars['Float']>;
+  readonly min: Maybe<Scalars['Float']>;
+  readonly sum: Maybe<Scalars['Float']>;
+  readonly group: ReadonlyArray<GraphCMS_AuthorGroupConnection>;
+};
+
+
+type GraphCMS_AuthorConnection_distinctArgs = {
+  field: GraphCMS_AuthorFieldsEnum;
+};
+
+
+type GraphCMS_AuthorConnection_maxArgs = {
+  field: GraphCMS_AuthorFieldsEnum;
+};
+
+
+type GraphCMS_AuthorConnection_minArgs = {
+  field: GraphCMS_AuthorFieldsEnum;
+};
+
+
+type GraphCMS_AuthorConnection_sumArgs = {
+  field: GraphCMS_AuthorFieldsEnum;
+};
+
+
+type GraphCMS_AuthorConnection_groupArgs = {
+  skip: Maybe<Scalars['Int']>;
+  limit: Maybe<Scalars['Int']>;
+  field: GraphCMS_AuthorFieldsEnum;
+};
+
+type GraphCMS_AuthorEdge = {
+  readonly next: Maybe<GraphCMS_Author>;
+  readonly node: GraphCMS_Author;
+  readonly previous: Maybe<GraphCMS_Author>;
+};
+
+type GraphCMS_AuthorFieldsEnum =
+  | 'remoteTypeName'
+  | 'remoteId'
+  | 'stage'
+  | 'createdAt'
+  | 'updatedAt'
+  | 'publishedAt'
+  | 'name'
+  | 'affiliation'
+  | 'slug'
+  | 'description'
+  | 'createdBy.remoteTypeName'
+  | 'createdBy.remoteId'
+  | 'createdBy.stage'
+  | 'createdBy.createdAt'
+  | 'createdBy.updatedAt'
+  | 'createdBy.publishedAt'
+  | 'createdBy.name'
+  | 'createdBy.picture'
+  | 'createdBy.isActive'
+  | 'createdBy.kind'
+  | 'createdBy.id'
+  | 'createdBy.parent.id'
+  | 'createdBy.parent.parent.id'
+  | 'createdBy.parent.parent.children'
+  | 'createdBy.parent.children'
+  | 'createdBy.parent.children.id'
+  | 'createdBy.parent.children.children'
+  | 'createdBy.parent.internal.content'
+  | 'createdBy.parent.internal.contentDigest'
+  | 'createdBy.parent.internal.description'
+  | 'createdBy.parent.internal.fieldOwners'
+  | 'createdBy.parent.internal.ignoreType'
+  | 'createdBy.parent.internal.mediaType'
+  | 'createdBy.parent.internal.owner'
+  | 'createdBy.parent.internal.type'
+  | 'createdBy.children'
+  | 'createdBy.children.id'
+  | 'createdBy.children.parent.id'
+  | 'createdBy.children.parent.children'
+  | 'createdBy.children.children'
+  | 'createdBy.children.children.id'
+  | 'createdBy.children.children.children'
+  | 'createdBy.children.internal.content'
+  | 'createdBy.children.internal.contentDigest'
+  | 'createdBy.children.internal.description'
+  | 'createdBy.children.internal.fieldOwners'
+  | 'createdBy.children.internal.ignoreType'
+  | 'createdBy.children.internal.mediaType'
+  | 'createdBy.children.internal.owner'
+  | 'createdBy.children.internal.type'
+  | 'createdBy.internal.content'
+  | 'createdBy.internal.contentDigest'
+  | 'createdBy.internal.description'
+  | 'createdBy.internal.fieldOwners'
+  | 'createdBy.internal.ignoreType'
+  | 'createdBy.internal.mediaType'
+  | 'createdBy.internal.owner'
+  | 'createdBy.internal.type'
+  | 'updatedBy.remoteTypeName'
+  | 'updatedBy.remoteId'
+  | 'updatedBy.stage'
+  | 'updatedBy.createdAt'
+  | 'updatedBy.updatedAt'
+  | 'updatedBy.publishedAt'
+  | 'updatedBy.name'
+  | 'updatedBy.picture'
+  | 'updatedBy.isActive'
+  | 'updatedBy.kind'
+  | 'updatedBy.id'
+  | 'updatedBy.parent.id'
+  | 'updatedBy.parent.parent.id'
+  | 'updatedBy.parent.parent.children'
+  | 'updatedBy.parent.children'
+  | 'updatedBy.parent.children.id'
+  | 'updatedBy.parent.children.children'
+  | 'updatedBy.parent.internal.content'
+  | 'updatedBy.parent.internal.contentDigest'
+  | 'updatedBy.parent.internal.description'
+  | 'updatedBy.parent.internal.fieldOwners'
+  | 'updatedBy.parent.internal.ignoreType'
+  | 'updatedBy.parent.internal.mediaType'
+  | 'updatedBy.parent.internal.owner'
+  | 'updatedBy.parent.internal.type'
+  | 'updatedBy.children'
+  | 'updatedBy.children.id'
+  | 'updatedBy.children.parent.id'
+  | 'updatedBy.children.parent.children'
+  | 'updatedBy.children.children'
+  | 'updatedBy.children.children.id'
+  | 'updatedBy.children.children.children'
+  | 'updatedBy.children.internal.content'
+  | 'updatedBy.children.internal.contentDigest'
+  | 'updatedBy.children.internal.description'
+  | 'updatedBy.children.internal.fieldOwners'
+  | 'updatedBy.children.internal.ignoreType'
+  | 'updatedBy.children.internal.mediaType'
+  | 'updatedBy.children.internal.owner'
+  | 'updatedBy.children.internal.type'
+  | 'updatedBy.internal.content'
+  | 'updatedBy.internal.contentDigest'
+  | 'updatedBy.internal.description'
+  | 'updatedBy.internal.fieldOwners'
+  | 'updatedBy.internal.ignoreType'
+  | 'updatedBy.internal.mediaType'
+  | 'updatedBy.internal.owner'
+  | 'updatedBy.internal.type'
+  | 'publishedBy.remoteTypeName'
+  | 'publishedBy.remoteId'
+  | 'publishedBy.stage'
+  | 'publishedBy.createdAt'
+  | 'publishedBy.updatedAt'
+  | 'publishedBy.publishedAt'
+  | 'publishedBy.name'
+  | 'publishedBy.picture'
+  | 'publishedBy.isActive'
+  | 'publishedBy.kind'
+  | 'publishedBy.id'
+  | 'publishedBy.parent.id'
+  | 'publishedBy.parent.parent.id'
+  | 'publishedBy.parent.parent.children'
+  | 'publishedBy.parent.children'
+  | 'publishedBy.parent.children.id'
+  | 'publishedBy.parent.children.children'
+  | 'publishedBy.parent.internal.content'
+  | 'publishedBy.parent.internal.contentDigest'
+  | 'publishedBy.parent.internal.description'
+  | 'publishedBy.parent.internal.fieldOwners'
+  | 'publishedBy.parent.internal.ignoreType'
+  | 'publishedBy.parent.internal.mediaType'
+  | 'publishedBy.parent.internal.owner'
+  | 'publishedBy.parent.internal.type'
+  | 'publishedBy.children'
+  | 'publishedBy.children.id'
+  | 'publishedBy.children.parent.id'
+  | 'publishedBy.children.parent.children'
+  | 'publishedBy.children.children'
+  | 'publishedBy.children.children.id'
+  | 'publishedBy.children.children.children'
+  | 'publishedBy.children.internal.content'
+  | 'publishedBy.children.internal.contentDigest'
+  | 'publishedBy.children.internal.description'
+  | 'publishedBy.children.internal.fieldOwners'
+  | 'publishedBy.children.internal.ignoreType'
+  | 'publishedBy.children.internal.mediaType'
+  | 'publishedBy.children.internal.owner'
+  | 'publishedBy.children.internal.type'
+  | 'publishedBy.internal.content'
+  | 'publishedBy.internal.contentDigest'
+  | 'publishedBy.internal.description'
+  | 'publishedBy.internal.fieldOwners'
+  | 'publishedBy.internal.ignoreType'
+  | 'publishedBy.internal.mediaType'
+  | 'publishedBy.internal.owner'
+  | 'publishedBy.internal.type'
+  | 'icon.remoteTypeName'
+  | 'icon.remoteId'
+  | 'icon.locale'
+  | 'icon.stage'
+  | 'icon.createdAt'
+  | 'icon.updatedAt'
+  | 'icon.publishedAt'
+  | 'icon.handle'
+  | 'icon.fileName'
+  | 'icon.height'
+  | 'icon.width'
+  | 'icon.size'
+  | 'icon.mimeType'
+  | 'icon.createdBy.remoteTypeName'
+  | 'icon.createdBy.remoteId'
+  | 'icon.createdBy.stage'
+  | 'icon.createdBy.createdAt'
+  | 'icon.createdBy.updatedAt'
+  | 'icon.createdBy.publishedAt'
+  | 'icon.createdBy.name'
+  | 'icon.createdBy.picture'
+  | 'icon.createdBy.isActive'
+  | 'icon.createdBy.kind'
+  | 'icon.createdBy.id'
+  | 'icon.createdBy.parent.id'
+  | 'icon.createdBy.parent.children'
+  | 'icon.createdBy.children'
+  | 'icon.createdBy.children.id'
+  | 'icon.createdBy.children.children'
+  | 'icon.createdBy.internal.content'
+  | 'icon.createdBy.internal.contentDigest'
+  | 'icon.createdBy.internal.description'
+  | 'icon.createdBy.internal.fieldOwners'
+  | 'icon.createdBy.internal.ignoreType'
+  | 'icon.createdBy.internal.mediaType'
+  | 'icon.createdBy.internal.owner'
+  | 'icon.createdBy.internal.type'
+  | 'icon.updatedBy.remoteTypeName'
+  | 'icon.updatedBy.remoteId'
+  | 'icon.updatedBy.stage'
+  | 'icon.updatedBy.createdAt'
+  | 'icon.updatedBy.updatedAt'
+  | 'icon.updatedBy.publishedAt'
+  | 'icon.updatedBy.name'
+  | 'icon.updatedBy.picture'
+  | 'icon.updatedBy.isActive'
+  | 'icon.updatedBy.kind'
+  | 'icon.updatedBy.id'
+  | 'icon.updatedBy.parent.id'
+  | 'icon.updatedBy.parent.children'
+  | 'icon.updatedBy.children'
+  | 'icon.updatedBy.children.id'
+  | 'icon.updatedBy.children.children'
+  | 'icon.updatedBy.internal.content'
+  | 'icon.updatedBy.internal.contentDigest'
+  | 'icon.updatedBy.internal.description'
+  | 'icon.updatedBy.internal.fieldOwners'
+  | 'icon.updatedBy.internal.ignoreType'
+  | 'icon.updatedBy.internal.mediaType'
+  | 'icon.updatedBy.internal.owner'
+  | 'icon.updatedBy.internal.type'
+  | 'icon.publishedBy.remoteTypeName'
+  | 'icon.publishedBy.remoteId'
+  | 'icon.publishedBy.stage'
+  | 'icon.publishedBy.createdAt'
+  | 'icon.publishedBy.updatedAt'
+  | 'icon.publishedBy.publishedAt'
+  | 'icon.publishedBy.name'
+  | 'icon.publishedBy.picture'
+  | 'icon.publishedBy.isActive'
+  | 'icon.publishedBy.kind'
+  | 'icon.publishedBy.id'
+  | 'icon.publishedBy.parent.id'
+  | 'icon.publishedBy.parent.children'
+  | 'icon.publishedBy.children'
+  | 'icon.publishedBy.children.id'
+  | 'icon.publishedBy.children.children'
+  | 'icon.publishedBy.internal.content'
+  | 'icon.publishedBy.internal.contentDigest'
+  | 'icon.publishedBy.internal.description'
+  | 'icon.publishedBy.internal.fieldOwners'
+  | 'icon.publishedBy.internal.ignoreType'
+  | 'icon.publishedBy.internal.mediaType'
+  | 'icon.publishedBy.internal.owner'
+  | 'icon.publishedBy.internal.type'
+  | 'icon.iconAuthor'
+  | 'icon.iconAuthor.remoteTypeName'
+  | 'icon.iconAuthor.remoteId'
+  | 'icon.iconAuthor.stage'
+  | 'icon.iconAuthor.createdAt'
+  | 'icon.iconAuthor.updatedAt'
+  | 'icon.iconAuthor.publishedAt'
+  | 'icon.iconAuthor.name'
+  | 'icon.iconAuthor.affiliation'
+  | 'icon.iconAuthor.slug'
+  | 'icon.iconAuthor.description'
+  | 'icon.iconAuthor.createdBy.remoteTypeName'
+  | 'icon.iconAuthor.createdBy.remoteId'
+  | 'icon.iconAuthor.createdBy.stage'
+  | 'icon.iconAuthor.createdBy.createdAt'
+  | 'icon.iconAuthor.createdBy.updatedAt'
+  | 'icon.iconAuthor.createdBy.publishedAt'
+  | 'icon.iconAuthor.createdBy.name'
+  | 'icon.iconAuthor.createdBy.picture'
+  | 'icon.iconAuthor.createdBy.isActive'
+  | 'icon.iconAuthor.createdBy.kind'
+  | 'icon.iconAuthor.createdBy.id'
+  | 'icon.iconAuthor.createdBy.children'
+  | 'icon.iconAuthor.updatedBy.remoteTypeName'
+  | 'icon.iconAuthor.updatedBy.remoteId'
+  | 'icon.iconAuthor.updatedBy.stage'
+  | 'icon.iconAuthor.updatedBy.createdAt'
+  | 'icon.iconAuthor.updatedBy.updatedAt'
+  | 'icon.iconAuthor.updatedBy.publishedAt'
+  | 'icon.iconAuthor.updatedBy.name'
+  | 'icon.iconAuthor.updatedBy.picture'
+  | 'icon.iconAuthor.updatedBy.isActive'
+  | 'icon.iconAuthor.updatedBy.kind'
+  | 'icon.iconAuthor.updatedBy.id'
+  | 'icon.iconAuthor.updatedBy.children'
+  | 'icon.iconAuthor.publishedBy.remoteTypeName'
+  | 'icon.iconAuthor.publishedBy.remoteId'
+  | 'icon.iconAuthor.publishedBy.stage'
+  | 'icon.iconAuthor.publishedBy.createdAt'
+  | 'icon.iconAuthor.publishedBy.updatedAt'
+  | 'icon.iconAuthor.publishedBy.publishedAt'
+  | 'icon.iconAuthor.publishedBy.name'
+  | 'icon.iconAuthor.publishedBy.picture'
+  | 'icon.iconAuthor.publishedBy.isActive'
+  | 'icon.iconAuthor.publishedBy.kind'
+  | 'icon.iconAuthor.publishedBy.id'
+  | 'icon.iconAuthor.publishedBy.children'
+  | 'icon.iconAuthor.icon.remoteTypeName'
+  | 'icon.iconAuthor.icon.remoteId'
+  | 'icon.iconAuthor.icon.locale'
+  | 'icon.iconAuthor.icon.stage'
+  | 'icon.iconAuthor.icon.createdAt'
+  | 'icon.iconAuthor.icon.updatedAt'
+  | 'icon.iconAuthor.icon.publishedAt'
+  | 'icon.iconAuthor.icon.handle'
+  | 'icon.iconAuthor.icon.fileName'
+  | 'icon.iconAuthor.icon.height'
+  | 'icon.iconAuthor.icon.width'
+  | 'icon.iconAuthor.icon.size'
+  | 'icon.iconAuthor.icon.mimeType'
+  | 'icon.iconAuthor.icon.iconAuthor'
+  | 'icon.iconAuthor.icon.url'
+  | 'icon.iconAuthor.icon.id'
+  | 'icon.iconAuthor.icon.children'
+  | 'icon.iconAuthor.id'
+  | 'icon.iconAuthor.parent.id'
+  | 'icon.iconAuthor.parent.children'
+  | 'icon.iconAuthor.children'
+  | 'icon.iconAuthor.children.id'
+  | 'icon.iconAuthor.children.children'
+  | 'icon.iconAuthor.internal.content'
+  | 'icon.iconAuthor.internal.contentDigest'
+  | 'icon.iconAuthor.internal.description'
+  | 'icon.iconAuthor.internal.fieldOwners'
+  | 'icon.iconAuthor.internal.ignoreType'
+  | 'icon.iconAuthor.internal.mediaType'
+  | 'icon.iconAuthor.internal.owner'
+  | 'icon.iconAuthor.internal.type'
+  | 'icon.url'
+  | 'icon.id'
+  | 'icon.parent.id'
+  | 'icon.parent.parent.id'
+  | 'icon.parent.parent.children'
+  | 'icon.parent.children'
+  | 'icon.parent.children.id'
+  | 'icon.parent.children.children'
+  | 'icon.parent.internal.content'
+  | 'icon.parent.internal.contentDigest'
+  | 'icon.parent.internal.description'
+  | 'icon.parent.internal.fieldOwners'
+  | 'icon.parent.internal.ignoreType'
+  | 'icon.parent.internal.mediaType'
+  | 'icon.parent.internal.owner'
+  | 'icon.parent.internal.type'
+  | 'icon.children'
+  | 'icon.children.id'
+  | 'icon.children.parent.id'
+  | 'icon.children.parent.children'
+  | 'icon.children.children'
+  | 'icon.children.children.id'
+  | 'icon.children.children.children'
+  | 'icon.children.internal.content'
+  | 'icon.children.internal.contentDigest'
+  | 'icon.children.internal.description'
+  | 'icon.children.internal.fieldOwners'
+  | 'icon.children.internal.ignoreType'
+  | 'icon.children.internal.mediaType'
+  | 'icon.children.internal.owner'
+  | 'icon.children.internal.type'
+  | 'icon.internal.content'
+  | 'icon.internal.contentDigest'
+  | 'icon.internal.description'
+  | 'icon.internal.fieldOwners'
+  | 'icon.internal.ignoreType'
+  | 'icon.internal.mediaType'
+  | 'icon.internal.owner'
+  | 'icon.internal.type'
+  | 'id'
+  | 'parent.id'
+  | 'parent.parent.id'
+  | 'parent.parent.parent.id'
+  | 'parent.parent.parent.children'
+  | 'parent.parent.children'
+  | 'parent.parent.children.id'
+  | 'parent.parent.children.children'
+  | 'parent.parent.internal.content'
+  | 'parent.parent.internal.contentDigest'
+  | 'parent.parent.internal.description'
+  | 'parent.parent.internal.fieldOwners'
+  | 'parent.parent.internal.ignoreType'
+  | 'parent.parent.internal.mediaType'
+  | 'parent.parent.internal.owner'
+  | 'parent.parent.internal.type'
+  | 'parent.children'
+  | 'parent.children.id'
+  | 'parent.children.parent.id'
+  | 'parent.children.parent.children'
+  | 'parent.children.children'
+  | 'parent.children.children.id'
+  | 'parent.children.children.children'
+  | 'parent.children.internal.content'
+  | 'parent.children.internal.contentDigest'
+  | 'parent.children.internal.description'
+  | 'parent.children.internal.fieldOwners'
+  | 'parent.children.internal.ignoreType'
+  | 'parent.children.internal.mediaType'
+  | 'parent.children.internal.owner'
+  | 'parent.children.internal.type'
+  | 'parent.internal.content'
+  | 'parent.internal.contentDigest'
+  | 'parent.internal.description'
+  | 'parent.internal.fieldOwners'
+  | 'parent.internal.ignoreType'
+  | 'parent.internal.mediaType'
+  | 'parent.internal.owner'
+  | 'parent.internal.type'
+  | 'children'
+  | 'children.id'
+  | 'children.parent.id'
+  | 'children.parent.parent.id'
+  | 'children.parent.parent.children'
+  | 'children.parent.children'
+  | 'children.parent.children.id'
+  | 'children.parent.children.children'
+  | 'children.parent.internal.content'
+  | 'children.parent.internal.contentDigest'
+  | 'children.parent.internal.description'
+  | 'children.parent.internal.fieldOwners'
+  | 'children.parent.internal.ignoreType'
+  | 'children.parent.internal.mediaType'
+  | 'children.parent.internal.owner'
+  | 'children.parent.internal.type'
+  | 'children.children'
+  | 'children.children.id'
+  | 'children.children.parent.id'
+  | 'children.children.parent.children'
+  | 'children.children.children'
+  | 'children.children.children.id'
+  | 'children.children.children.children'
+  | 'children.children.internal.content'
+  | 'children.children.internal.contentDigest'
+  | 'children.children.internal.description'
+  | 'children.children.internal.fieldOwners'
+  | 'children.children.internal.ignoreType'
+  | 'children.children.internal.mediaType'
+  | 'children.children.internal.owner'
+  | 'children.children.internal.type'
+  | 'children.internal.content'
+  | 'children.internal.contentDigest'
+  | 'children.internal.description'
+  | 'children.internal.fieldOwners'
+  | 'children.internal.ignoreType'
+  | 'children.internal.mediaType'
+  | 'children.internal.owner'
+  | 'children.internal.type'
+  | 'internal.content'
+  | 'internal.contentDigest'
+  | 'internal.description'
+  | 'internal.fieldOwners'
+  | 'internal.ignoreType'
+  | 'internal.mediaType'
+  | 'internal.owner'
+  | 'internal.type';
+
+type GraphCMS_AuthorGroupConnection = {
+  readonly totalCount: Scalars['Int'];
+  readonly edges: ReadonlyArray<GraphCMS_AuthorEdge>;
+  readonly nodes: ReadonlyArray<GraphCMS_Author>;
+  readonly pageInfo: PageInfo;
+  readonly field: Scalars['String'];
+  readonly fieldValue: Maybe<Scalars['String']>;
+};
+
+type GraphCMS_AuthorSortInput = {
+  readonly fields: Maybe<ReadonlyArray<Maybe<GraphCMS_AuthorFieldsEnum>>>;
+  readonly order: Maybe<ReadonlyArray<Maybe<SortOrderEnum>>>;
+};
+
 type SitePluginConnection = {
   readonly totalCount: Scalars['Int'];
   readonly edges: ReadonlyArray<SitePluginEdge>;
@@ -3294,6 +4777,15 @@ type SitePluginFieldsEnum =
   | 'pluginOptions.cssPropOptimization'
   | 'pluginOptions.path'
   | 'pluginOptions.name'
+  | 'pluginOptions.endpoint'
+  | 'pluginOptions.token'
+  | 'pluginOptions.stages'
+  | 'pluginOptions.buildMarkdownNodes'
+  | 'pluginOptions.downloadLocalImages'
+  | 'pluginOptions.fragmentsPath'
+  | 'pluginOptions.locales'
+  | 'pluginOptions.typePrefix'
+  | 'pluginOptions.concurrency'
   | 'pluginOptions.maxWidth'
   | 'pluginOptions.linkImagesToOriginal'
   | 'pluginOptions.showCaptions'
@@ -3527,10 +5019,10 @@ type cProductgatsbyGraphCmSsrcpages404Js3159585216QueryVariables = Exact<{ [key:
 
 type cProductgatsbyGraphCmSsrcpages404Js3159585216Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title'>> }> };
 
-type cProductgatsbyGraphCmSsrccomponentsseoJs2841359383QueryVariables = Exact<{ [key: string]: never; }>;
+type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type cProductgatsbyGraphCmSsrccomponentsseoJs2841359383Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<(
+type Unnamed_1_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<(
       Pick<SiteSiteMetadata, 'title' | 'description'>
       & { readonly social: Maybe<Pick<Social, 'twitter'>> }
     )> }> };
