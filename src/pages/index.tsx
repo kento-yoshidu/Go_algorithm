@@ -15,15 +15,15 @@ type Props = {
 
 const BlogIndex: React.VFC<Props> = ({ data, location }) => (
   <>
-    {data.allGraphCmsAuthor.edges.map(({node}) => {
-      return (
-        <>
-          <p>aaa</p>
+    <p tw="text-3xl font-bold py-2">aaa</p>
+    {data.allGraphCmsAuthor.edges.map(({node}) => (
+        <div key={node.name}>
+          <p tw="text-3xl font-bold py-2">aaa</p>
           <p>{node.name}</p>
           <p>{node.slug}</p>
-        </>
-      )
-    })}
+        </div>
+    )
+    )}
   </>
 )
 
