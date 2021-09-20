@@ -18,7 +18,7 @@ module.exports = {
   plugins: [
     `gatsby-plugin-image`,
     `gatsby-plugin-typegen`,
-    `gatsby-plugin-emotion`,
+    //`gatsby-plugin-emotion`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
