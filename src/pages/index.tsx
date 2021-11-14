@@ -20,7 +20,6 @@ type Props = {
 const BlogIndex: React.VFC<Props> = ({ data, location }) => (
   <>
     <FontAwesomeIcon icon={faUserEdit} />
-    <p tw="text-3xl font-bold py-2">aaa</p>
     {data.allGraphCmsAuthor.edges.map(({node}) => (
         <div key={node.name}>
           <p tw="text-3xl font-bold py-2">aaa</p>
