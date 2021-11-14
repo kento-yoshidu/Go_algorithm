@@ -2,8 +2,6 @@ import * as React from "react"
 import { Link, graphql } from "gatsby"
 import "twin.macro"
 
-import Bio from "../components/bio"
-import Layout from "../components/layout"
 import Seo from "../components/seo"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -19,6 +17,12 @@ type Props = {
 
 const BlogIndex: React.VFC<Props> = ({ data, location }) => (
   <>
+    <Seo
+      description="トップページ"
+      lang="ja"
+      title="HOME"
+    />
+
     <FontAwesomeIcon icon={faUserEdit} />
     {data.allGraphCmsAuthor.edges.map(({node}) => (
         <div key={node.name}>
