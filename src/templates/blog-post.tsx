@@ -3,7 +3,12 @@ import { Link, graphql } from "gatsby"
 
 import Seo from "../components/seo"
 
-const BlogPostTemplate = ({ data, location }) => {
+interface Props {
+  data: GatsbyTypes.BlogPostQuery
+  location: string
+}
+
+const BlogPostTemplate: React.VFC<Props> = ({ data, location }) => {
   const post = data.markdownRemark
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const { previous, next } = data
@@ -62,7 +67,7 @@ const BlogPostTemplate = ({ data, location }) => {
 export default BlogPostTemplate
 
 export const pageQuery = graphql`
-  query BlogPostBySlug(
+  query BlogPost (
     $id: String!
     $previousPostId: String
     $nextPostId: String
