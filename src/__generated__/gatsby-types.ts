@@ -855,6 +855,8 @@ type SitePluginPluginOptions = {
   readonly autoLabel: Maybe<Scalars['String']>;
   readonly labelFormat: Maybe<Scalars['String']>;
   readonly cssPropOptimization: Maybe<Scalars['Boolean']>;
+  readonly path: Maybe<Scalars['String']>;
+  readonly name: Maybe<Scalars['String']>;
   readonly endpoint: Maybe<Scalars['String']>;
   readonly token: Maybe<Scalars['String']>;
   readonly stages: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
@@ -884,7 +886,6 @@ type SitePluginPluginOptions = {
   readonly failOnError: Maybe<Scalars['Boolean']>;
   readonly query: Maybe<Scalars['String']>;
   readonly feeds: Maybe<ReadonlyArray<Maybe<SitePluginPluginOptionsFeeds>>>;
-  readonly name: Maybe<Scalars['String']>;
   readonly short_name: Maybe<Scalars['String']>;
   readonly start_url: Maybe<Scalars['String']>;
   readonly background_color: Maybe<Scalars['String']>;
@@ -897,11 +898,10 @@ type SitePluginPluginOptions = {
   readonly crossOrigin: Maybe<Scalars['String']>;
   readonly include_favicon: Maybe<Scalars['Boolean']>;
   readonly cacheDigest: Maybe<Scalars['String']>;
+  readonly pathCheck: Maybe<Scalars['Boolean']>;
   readonly allExtensions: Maybe<Scalars['Boolean']>;
   readonly isTSX: Maybe<Scalars['Boolean']>;
   readonly jsxPragma: Maybe<Scalars['String']>;
-  readonly path: Maybe<Scalars['String']>;
-  readonly pathCheck: Maybe<Scalars['Boolean']>;
 };
 
 type SitePluginPluginOptionsPlugins = {
@@ -2716,6 +2716,8 @@ type SitePluginPluginOptionsFilterInput = {
   readonly autoLabel: Maybe<StringQueryOperatorInput>;
   readonly labelFormat: Maybe<StringQueryOperatorInput>;
   readonly cssPropOptimization: Maybe<BooleanQueryOperatorInput>;
+  readonly path: Maybe<StringQueryOperatorInput>;
+  readonly name: Maybe<StringQueryOperatorInput>;
   readonly endpoint: Maybe<StringQueryOperatorInput>;
   readonly token: Maybe<StringQueryOperatorInput>;
   readonly stages: Maybe<StringQueryOperatorInput>;
@@ -2745,7 +2747,6 @@ type SitePluginPluginOptionsFilterInput = {
   readonly failOnError: Maybe<BooleanQueryOperatorInput>;
   readonly query: Maybe<StringQueryOperatorInput>;
   readonly feeds: Maybe<SitePluginPluginOptionsFeedsFilterListInput>;
-  readonly name: Maybe<StringQueryOperatorInput>;
   readonly short_name: Maybe<StringQueryOperatorInput>;
   readonly start_url: Maybe<StringQueryOperatorInput>;
   readonly background_color: Maybe<StringQueryOperatorInput>;
@@ -2758,11 +2759,10 @@ type SitePluginPluginOptionsFilterInput = {
   readonly crossOrigin: Maybe<StringQueryOperatorInput>;
   readonly include_favicon: Maybe<BooleanQueryOperatorInput>;
   readonly cacheDigest: Maybe<StringQueryOperatorInput>;
+  readonly pathCheck: Maybe<BooleanQueryOperatorInput>;
   readonly allExtensions: Maybe<BooleanQueryOperatorInput>;
   readonly isTSX: Maybe<BooleanQueryOperatorInput>;
   readonly jsxPragma: Maybe<StringQueryOperatorInput>;
-  readonly path: Maybe<StringQueryOperatorInput>;
-  readonly pathCheck: Maybe<BooleanQueryOperatorInput>;
 };
 
 type SitePluginPluginOptionsPluginsFilterListInput = {
@@ -3039,6 +3039,8 @@ type SitePageFieldsEnum =
   | 'pluginCreator.pluginOptions.autoLabel'
   | 'pluginCreator.pluginOptions.labelFormat'
   | 'pluginCreator.pluginOptions.cssPropOptimization'
+  | 'pluginCreator.pluginOptions.path'
+  | 'pluginCreator.pluginOptions.name'
   | 'pluginCreator.pluginOptions.endpoint'
   | 'pluginCreator.pluginOptions.token'
   | 'pluginCreator.pluginOptions.stages'
@@ -3070,7 +3072,6 @@ type SitePageFieldsEnum =
   | 'pluginCreator.pluginOptions.feeds'
   | 'pluginCreator.pluginOptions.feeds.query'
   | 'pluginCreator.pluginOptions.feeds.output'
-  | 'pluginCreator.pluginOptions.name'
   | 'pluginCreator.pluginOptions.short_name'
   | 'pluginCreator.pluginOptions.start_url'
   | 'pluginCreator.pluginOptions.background_color'
@@ -3083,11 +3084,10 @@ type SitePageFieldsEnum =
   | 'pluginCreator.pluginOptions.crossOrigin'
   | 'pluginCreator.pluginOptions.include_favicon'
   | 'pluginCreator.pluginOptions.cacheDigest'
+  | 'pluginCreator.pluginOptions.pathCheck'
   | 'pluginCreator.pluginOptions.allExtensions'
   | 'pluginCreator.pluginOptions.isTSX'
   | 'pluginCreator.pluginOptions.jsxPragma'
-  | 'pluginCreator.pluginOptions.path'
-  | 'pluginCreator.pluginOptions.pathCheck'
   | 'pluginCreator.nodeAPIs'
   | 'pluginCreator.browserAPIs'
   | 'pluginCreator.ssrAPIs'
@@ -5968,6 +5968,8 @@ type SitePluginFieldsEnum =
   | 'pluginOptions.autoLabel'
   | 'pluginOptions.labelFormat'
   | 'pluginOptions.cssPropOptimization'
+  | 'pluginOptions.path'
+  | 'pluginOptions.name'
   | 'pluginOptions.endpoint'
   | 'pluginOptions.token'
   | 'pluginOptions.stages'
@@ -5999,7 +6001,6 @@ type SitePluginFieldsEnum =
   | 'pluginOptions.feeds'
   | 'pluginOptions.feeds.query'
   | 'pluginOptions.feeds.output'
-  | 'pluginOptions.name'
   | 'pluginOptions.short_name'
   | 'pluginOptions.start_url'
   | 'pluginOptions.background_color'
@@ -6012,11 +6013,10 @@ type SitePluginFieldsEnum =
   | 'pluginOptions.crossOrigin'
   | 'pluginOptions.include_favicon'
   | 'pluginOptions.cacheDigest'
+  | 'pluginOptions.pathCheck'
   | 'pluginOptions.allExtensions'
   | 'pluginOptions.isTSX'
   | 'pluginOptions.jsxPragma'
-  | 'pluginOptions.path'
-  | 'pluginOptions.pathCheck'
   | 'nodeAPIs'
   | 'browserAPIs'
   | 'ssrAPIs'
