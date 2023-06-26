@@ -26,7 +26,7 @@ func Test_product(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := product(tt.args.a, tt.args.b); got != tt.want {
+			if got := A_product(tt.args.a, tt.args.b); got != tt.want {
 				t.Errorf("Product() = %v, want = %v", got, tt.want)
 			}
 		})
