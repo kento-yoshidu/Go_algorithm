@@ -1,11 +1,13 @@
 package main
 
 import (
-	abc086 "algorithm/AtCoder/ABC086"
+	"algorithm/AtCoder/ABC3xx/abc303"
 	"fmt"
 )
 
 func main() {
 	fmt.Println("Hello World")
-	fmt.Println(abc086.B_1_21(1, 69))
+	fmt.Printf("%v\n", abc303.Run(3, "l0w", "1ow"))
+	fmt.Printf("%v\n", abc303.Run(3, "abc", "arc"))
+	fmt.Printf("%v\n", abc303.Run(4, "nok0", "n0ko"))
 }
