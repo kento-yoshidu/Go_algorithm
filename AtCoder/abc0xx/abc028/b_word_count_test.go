@@ -1,4 +1,4 @@
-package abc012
+package abc028
 
 import (
 	"reflect"
@@ -7,29 +7,34 @@ import (
 
 func Test_nine_nine(t *testing.T) {
 	type args struct {
-		n int
+		s string
 	}
 
 	tests := []struct {
 		name string
 		args args
-		want []string
+		want []int
 	}{
 		{
 			name: "first",
-			args: args{n: 2013},
-			want: []string{"2 * 6", "3 * 4", "4 * 3", "6 * 2"},
+			args: args{s: "BEAF"},
+			want: []int{1, 1, 0, 0, 1, 1},
 		},
 		{
 			name: "second",
-			args: args{n: 2024},
-			want: []string{"1 * 1"},
+			args: args{s: "DECADE"},
+			want: []int{1, 0, 1, 2, 2, 0},
+		},
+		{
+			name: "third",
+			args: args{s: "ABBCCCDDDDEEEEEFFFFFF"},
+			want: []int{1, 2, 3, 4, 5, 6},
 		},
 	}
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := C_nine_nine(tt.args.n); !reflect.DeepEqual(got, tt.want) {
+			if got := B_word_count(tt.args.s); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("c_nine_nine() = %v, want %v", got, tt.want)
 			}
 		})
