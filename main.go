@@ -1,13 +1,12 @@
 package main
 
 import (
-	"algorithm/AtCoder/ABC3xx/abc303"
+	"algorithm/AtCoder/arc0xx/arc082"
 	"fmt"
 )
 
 func main() {
 	fmt.Println("Hello World")
-	fmt.Printf("%v\n", abc303.Run(3, "l0w", "1ow"))
-	fmt.Printf("%v\n", abc303.Run(3, "abc", "arc"))
-	fmt.Printf("%v\n", abc303.Run(4, "nok0", "n0ko"))
+	fmt.Printf("%v", arc082.C_together(10, []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}))
+	fmt.Printf("%v", arc082.C_together(1, []int{99999}))
 }

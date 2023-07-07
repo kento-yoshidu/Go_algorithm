@@ -19,8 +19,3 @@ func C_nine_nine(n int) []string {
 
 	return ans
 }
-
-/*
-	fmt.Printf("%#v", abc012.Run(2013))
-	fmt.Printf("%#v", abc012.Run(2024))
-*/
