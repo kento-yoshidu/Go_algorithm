@@ -1,4 +1,4 @@
-package tessoku_book_axx
+package axx
 
 import (
 	"testing"
