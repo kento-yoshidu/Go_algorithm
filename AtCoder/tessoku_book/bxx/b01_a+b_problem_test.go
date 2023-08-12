@@ -1,4 +1,4 @@
-package bxx
+package tessoku_bxx
 
 import (
 	"testing"
